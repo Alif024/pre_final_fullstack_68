@@ -1,0 +1,58 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "student_code": "5165485",
+      "full_name": "Ananyot Saywong",
+      "major": "INET",
+      "createdAt": "2026-03-18T13:16:15.565Z",
+      "updatedAt": "2026-03-18T13:16:15.565Z"
+    },
+    {
+      "id": 2,
+      "student_code": "15316584",
+      "full_name": "Somchai -",
+      "major": "INET",
+      "createdAt": "2026-03-18T13:16:26.985Z",
+      "updatedAt": "2026-03-18T13:16:26.985Z"
+    }
+  ],
+  "subjects": [
+    {
+      "id": 1,
+      "subject_code": "060233115",
+      "subject_name": "Comprogramming",
+      "credits": 3,
+      "createdAt": "2026-03-18T13:16:41.023Z",
+      "updatedAt": "2026-03-18T13:16:41.023Z"
+    },
+    {
+      "id": 2,
+      "subject_code": "060233108",
+      "subject_name": "Datacomunication",
+      "credits": 1,
+      "createdAt": "2026-03-18T13:17:02.409Z",
+      "updatedAt": "2026-03-18T13:18:12.925Z"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": 1,
+      "student_id": 1,
+      "subject_id": 2,
+      "semester": "1/2568",
+      "grade": null,
+      "createdAt": "2026-03-18T13:20:48.401Z",
+      "updatedAt": "2026-03-18T13:20:48.401Z"
+    },
+    {
+      "id": 3,
+      "student_id": 2,
+      "subject_id": 1,
+      "semester": "1/2568",
+      "grade": null,
+      "createdAt": "2026-03-18T13:22:47.569Z",
+      "updatedAt": "2026-03-18T13:28:25.936Z"
+    }
+  ]
+}
