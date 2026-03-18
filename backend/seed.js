@@ -10,7 +10,7 @@ app.use(express.json());
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: './backend/database/data.db'
+  storage: './backend/database/data.sqlite'
 });
 
 const Students = sequelize.define('students', {
@@ -50,6 +50,10 @@ const Subjects = sequelize.define('subjects', {
   subject_name: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  credits: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
   }
 });
 
@@ -168,6 +172,75 @@ app.delete('/students/:id', async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: 'Failed to delete student' });
+  }
+});
+
+  // Similar routes can be created for Subjects and Enrollments following the same pattern as above
+app.get('/subjects', async (req, res) => {
+  try {
+    const subjects = await Subjects.findAll();
+    if (subjects.length > 0) {
+      res.json(subjects);
+    } else {
+      res.status(404).json({ error: 'No subjects found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch subjects' });
+  }
+});
+
+app.get('/subjects/:id', async (req, res) => {
+  try {
+    const subject = await Subjects.findByPk(req.params.id);
+    if (subject) {
+      res.json(subject);
+    } else {
+      res.status(404).json({ error: 'Subject not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch subject' });
+  }
+});
+
+app.post('/subjects', async (req, res) => {
+  try {
+    const { subject_code, subject_name, credits } = req.body;
+    const subject = await Subjects.create({ subject_code, subject_name, credits });
+    res.status(201).json(subject);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create subject' });
+  }
+});
+
+app.put('/subjects/:id', async (req, res) => {
+  try {
+    const { subject_code, subject_name, credits } = req.body;
+    const subject = await Subjects.findByPk(req.params.id);
+    if (subject) {
+      subject.subject_code = subject_code || subject.subject_code;
+      subject.subject_name = subject_name || subject.subject_name;
+      subject.credits = credits || subject.credits;
+      await subject.save();
+      res.json(subject);
+    } else {
+      res.status(404).json({ error: 'Subject not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update subject' });
+  }
+});
+
+app.delete('/subjects/:id', async (req, res) => {
+  try {
+    const subject = await Subjects.findByPk(req.params.id);
+    if (subject) {
+      await subject.destroy();
+      res.json({ message: 'Subject deleted' });
+    } else {
+      res.status(404).json({ error: 'Subject not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete subject' });
   }
 });
 
