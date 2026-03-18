@@ -6,6 +6,26 @@
   <title>All Data</title>
 </head>
 <body>
-  <h1>Hello World</h1>
+  <h1>Student Data</h1>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Student Code</th>
+      <th>Full Name</th>
+      <th>Major</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+    </tr>
+    <% students.forEach((student) => { %>
+      <tr>
+        <td><%= student.id %></td>
+        <td><%= student.student_code %></td>
+        <td><%= student.full_name %></td>
+        <td><%= student.major %></td>
+        <td><%= student.createdAt %></td>
+        <td><%= student.updatedAt %></td>
+      </tr>
+    <% }) %>
+  </table>
 </body>
 </html>
