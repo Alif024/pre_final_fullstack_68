@@ -47,8 +47,8 @@
   <table border="1">
     <tr>
       <th>ID</th>
-      <th>Student ID</th>
-      <th>Subject ID</th>
+      <th>Full Name</th>
+      <th>Subject Name</th>
       <th>Semester</th>
       <th>Grade</th>
       <th>Created At</th>
@@ -57,10 +57,12 @@
       <th>Delete</th>
     </tr>
     <% enrollments.forEach((enrollment) => { %>
+      <% const studentData = students.find((student) => student.id === enrollment.student_id); %>
+      <% const subjectData = subjects.find((subject) => subject.id === enrollment.subject_id); %>
       <tr>
         <td><%= enrollment.id %></td>
-        <td><%= enrollment.student_id %></td>
-        <td><%= enrollment.subject_id %></td>
+        <td><%= studentData ? studentData.full_name : enrollment.student_id %></td>
+        <td><%= subjectData ? subjectData.subject_name : enrollment.subject_id %></td>
         <td><%= enrollment.semester %></td>
         <td><%= enrollment.grade %></td>
         <td><%= enrollment.createdAt %></td>
