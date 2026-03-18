@@ -29,9 +29,49 @@
   </table>
 
   <h1>Subject Data</h1>
-  <!-- Implement Subject Data -->
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Subject Code</th>
+      <th>Subject Name</th>
+      <th>Credits</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+    </tr>
+    <% subjects.forEach((subject) => { %>
+      <tr>
+        <td><%= subject.id %></td>
+        <td><%= subject.subject_code %></td>
+        <td><%= subject.subject_name %></td>
+        <td><%= subject.credits %></td>
+        <td><%= subject.createdAt %></td>
+        <td><%= subject.updatedAt %></td>
+      </tr>
+    <% }) %>
+  </table>
 
   <h1>Enrollment Data</h1>
-  <!-- Implement Enrollment Data -->
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Student ID</th>
+      <th>Subject ID</th>
+      <th>Semester</th>
+      <th>Grade</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+    </tr>
+    <% enrollments.forEach((enrollment) => { %>
+      <tr>
+        <td><%= enrollment.id %></td>
+        <td><%= enrollment.student_id %></td>
+        <td><%= enrollment.subject_id %></td>
+        <td><%= enrollment.semester %></td>
+        <td><%= enrollment.grade %></td>
+        <td><%= enrollment.createdAt %></td>
+        <td><%= enrollment.updatedAt %></td>
+      </tr>
+    <% }) %>
+  </table>
 </body>
 </html>
