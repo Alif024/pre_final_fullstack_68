@@ -6,6 +6,100 @@
   <title>Enrollment Data</title>
 </head>
 <body>
-  
+  <h1>Enrollments</h1>
+  <p><a href="/">Back to Home</a></p>
+
+  <h2>Create Enrollment</h2>
+  <form action="/enrollments" method="POST">
+    <p>
+      <label for="student_id">Student</label>
+      <select id="student_id" name="student_id" required>
+        <% students.forEach((student) => { %>
+          <option value="<%= student.id %>">
+            <%= student.id %> - <%= student.full_name %>
+          </option>
+        <% }) %>
+      </select>
+    </p>
+    <p>
+      <label for="subject_id">Subject</label>
+      <select id="subject_id" name="subject_id" required>
+        <% subjects.forEach((subject) => { %>
+          <option value="<%= subject.id %>">
+            <%= subject.id %> - <%= subject.subject_name %>
+          </option>
+        <% }) %>
+      </select>
+    </p>
+    <p>
+      <label for="semester">Semester</label>
+      <input type="text" id="semester" name="semester" required>
+    </p>
+    <p>
+      <label for="grade">Grade</label>
+      <input type="text" id="grade" name="grade">
+    </p>
+    <button type="submit">Create Enrollment</button>
+  </form>
+
+  <h2>All Enrollments</h2>
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Student ID</th>
+      <th>Subject ID</th>
+      <th>Semester</th>
+      <th>Grade</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+    <% enrollments.forEach((enrollment) => { %>
+      <tr>
+        <td><%= enrollment.id %></td>
+        <td><%= enrollment.student_id %></td>
+        <td><%= enrollment.subject_id %></td>
+        <td><%= enrollment.semester %></td>
+        <td><%= enrollment.grade %></td>
+        <td><%= enrollment.createdAt %></td>
+        <td><%= enrollment.updatedAt %></td>
+        <td>
+          <form action="/enrollments/<%= enrollment.id %>/update" method="POST">
+            <p>
+              <select name="student_id" required>
+                <% students.forEach((student) => { %>
+                  <option value="<%= student.id %>" <%= student.id === enrollment.student_id ? "selected" : "" %>>
+                    <%= student.id %> - <%= student.full_name %>
+                  </option>
+                <% }) %>
+              </select>
+            </p>
+            <p>
+              <select name="subject_id" required>
+                <% subjects.forEach((subject) => { %>
+                  <option value="<%= subject.id %>" <%= subject.id === enrollment.subject_id ? "selected" : "" %>>
+                    <%= subject.id %> - <%= subject.subject_name %>
+                  </option>
+                <% }) %>
+              </select>
+            </p>
+            <p>
+              <input type="text" name="semester" value="<%= enrollment.semester %>" required>
+            </p>
+            <p>
+              <input type="text" name="grade" value="<%= enrollment.grade || "" %>">
+            </p>
+            <button type="submit">Update</button>
+          </form>
+        </td>
+        <td>
+          <form action="/enrollments/<%= enrollment.id %>/delete" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
 </body>
 </html>

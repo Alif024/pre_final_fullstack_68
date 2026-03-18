@@ -6,6 +6,67 @@
   <title>Students Data</title>
 </head>
 <body>
-  
+  <h1>Students</h1>
+  <p><a href="/">Back to Home</a></p>
+
+  <h2>Create Student</h2>
+  <form action="/students" method="POST">
+    <p>
+      <label for="student_code">Student Code</label>
+      <input type="text" id="student_code" name="student_code" required>
+    </p>
+    <p>
+      <label for="full_name">Full Name</label>
+      <input type="text" id="full_name" name="full_name" required>
+    </p>
+    <p>
+      <label for="major">Major</label>
+      <input type="text" id="major" name="major" required>
+    </p>
+    <button type="submit">Create Student</button>
+  </form>
+
+  <h2>All Students</h2>
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Student Code</th>
+      <th>Full Name</th>
+      <th>Major</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+    <% students.forEach((student) => { %>
+      <tr>
+        <td><%= student.id %></td>
+        <td><%= student.student_code %></td>
+        <td><%= student.full_name %></td>
+        <td><%= student.major %></td>
+        <td><%= student.createdAt %></td>
+        <td><%= student.updatedAt %></td>
+        <td>
+          <form action="/students/<%= student.id %>/update" method="POST">
+            <p>
+              <input type="text" name="student_code" value="<%= student.student_code %>" required>
+            </p>
+            <p>
+              <input type="text" name="full_name" value="<%= student.full_name %>" required>
+            </p>
+            <p>
+              <input type="text" name="major" value="<%= student.major %>" required>
+            </p>
+            <button type="submit">Update</button>
+          </form>
+        </td>
+        <td>
+          <form action="/students/<%= student.id %>/delete" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
 </body>
 </html>

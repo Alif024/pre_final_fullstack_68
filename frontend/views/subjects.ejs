@@ -6,6 +6,67 @@
   <title>Subjects Data</title>
 </head>
 <body>
-  
+  <h1>Subjects</h1>
+  <p><a href="/">Back to Home</a></p>
+
+  <h2>Create Subject</h2>
+  <form action="/subjects" method="POST">
+    <p>
+      <label for="subject_code">Subject Code</label>
+      <input type="text" id="subject_code" name="subject_code" required>
+    </p>
+    <p>
+      <label for="subject_name">Subject Name</label>
+      <input type="text" id="subject_name" name="subject_name" required>
+    </p>
+    <p>
+      <label for="credits">Credits</label>
+      <input type="number" id="credits" name="credits" required>
+    </p>
+    <button type="submit">Create Subject</button>
+  </form>
+
+  <h2>All Subjects</h2>
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Subject Code</th>
+      <th>Subject Name</th>
+      <th>Credits</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+    <% subjects.forEach((subject) => { %>
+      <tr>
+        <td><%= subject.id %></td>
+        <td><%= subject.subject_code %></td>
+        <td><%= subject.subject_name %></td>
+        <td><%= subject.credits %></td>
+        <td><%= subject.createdAt %></td>
+        <td><%= subject.updatedAt %></td>
+        <td>
+          <form action="/subjects/<%= subject.id %>/update" method="POST">
+            <p>
+              <input type="text" name="subject_code" value="<%= subject.subject_code %>" required>
+            </p>
+            <p>
+              <input type="text" name="subject_name" value="<%= subject.subject_name %>" required>
+            </p>
+            <p>
+              <input type="number" name="credits" value="<%= subject.credits %>" required>
+            </p>
+            <button type="submit">Update</button>
+          </form>
+        </td>
+        <td>
+          <form action="/subjects/<%= subject.id %>/delete" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
 </body>
 </html>
