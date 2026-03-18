@@ -11,7 +11,7 @@ const port = process.env.FRONTEND_PORT || 3001;
 const BACKEND_URL = `http://localhost:${process.env.BACKEND_PORT || 3000}`;
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname));
+app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -20,7 +20,7 @@ app.get("/", async (req, res) => {
     const studentsResponse = await axios.get(`${BACKEND_URL}/students`);
     const subjectsResponse = await axios.get(`${BACKEND_URL}/subjects`);
     const enrollmentsResponse = await axios.get(`${BACKEND_URL}/enrollments`);
-    res.render("app", {
+    res.render("index", {
       students: studentsResponse.data,
       subjects: subjectsResponse.data,
       enrollments: enrollmentsResponse.data,
