@@ -27,7 +27,11 @@ app.get("/", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching data from backend:", error);
-    res.status(500).send("Error fetching data from backend");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error fetching data from backend'); window.history.back();</script>",
+      );
   }
 });
 
@@ -39,7 +43,11 @@ app.get("/students", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching students:", error.message);
-    res.status(500).send("Error fetching students");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error fetching students'); window.history.back();</script>",
+      );
   }
 });
 
@@ -54,7 +62,11 @@ app.post("/students", async (req, res) => {
     res.redirect("/students");
   } catch (error) {
     console.error("Error creating student:", error.message);
-    res.status(500).send("Error creating student");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error creating student'); window.history.back();</script>",
+      );
   }
 });
 
@@ -69,7 +81,11 @@ app.post("/students/:id/update", async (req, res) => {
     res.redirect("/students");
   } catch (error) {
     console.error("Error updating student:", error.message);
-    res.status(500).send("Error updating student");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error updating student'); window.history.back();</script>",
+      );
   }
 });
 
@@ -79,7 +95,11 @@ app.post("/students/:id/delete", async (req, res) => {
     res.redirect("/students");
   } catch (error) {
     console.error("Error deleting student:", error.message);
-    res.status(500).send("Error deleting student");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error deleting student'); window.history.back();</script>",
+      );
   }
 });
 
@@ -91,7 +111,11 @@ app.get("/subjects", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching subjects:", error.message);
-    res.status(500).send("Error fetching subjects");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error fetching subjects'); window.history.back();</script>",
+      );
   }
 });
 
@@ -106,7 +130,11 @@ app.post("/subjects", async (req, res) => {
     res.redirect("/subjects");
   } catch (error) {
     console.error("Error creating subject:", error.message);
-    res.status(500).send("Error creating subject");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error creating subject'); window.history.back();</script>",
+      );
   }
 });
 
@@ -121,7 +149,11 @@ app.post("/subjects/:id/update", async (req, res) => {
     res.redirect("/subjects");
   } catch (error) {
     console.error("Error updating subject:", error.message);
-    res.status(500).send("Error updating subject");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error updating subject'); window.history.back();</script>",
+      );
   }
 });
 
@@ -131,7 +163,11 @@ app.post("/subjects/:id/delete", async (req, res) => {
     res.redirect("/subjects");
   } catch (error) {
     console.error("Error deleting subject:", error.message);
-    res.status(500).send("Error deleting subject");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error deleting subject'); window.history.back();</script>",
+      );
   }
 });
 
@@ -151,7 +187,11 @@ app.get("/enrollments", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching enrollments:", error.message);
-    res.status(500).send("Error fetching enrollments");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error fetching enrollments'); window.history.back();</script>",
+      );
   }
 });
 
@@ -187,7 +227,11 @@ app.post("/enrollments/:id/update", async (req, res) => {
     res.redirect("/enrollments");
   } catch (error) {
     console.error("Error updating enrollment:", error.message);
-    res.status(500).send("Error updating enrollment");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error updating enrollment'); window.history.back();</script>",
+      );
   }
 });
 
@@ -197,7 +241,11 @@ app.post("/enrollments/:id/delete", async (req, res) => {
     res.redirect("/enrollments");
   } catch (error) {
     console.error("Error deleting enrollment:", error.message);
-    res.status(500).send("Error deleting enrollment");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error deleting enrollment'); window.history.back();</script>",
+      );
   }
 });
 
