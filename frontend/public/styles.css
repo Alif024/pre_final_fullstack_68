@@ -1,0 +1,168 @@
+html {
+  font-family: Georgia, "Times New Roman", serif;
+  background: #f5efe4;
+  color: #2f241d;
+}
+
+body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+  line-height: 1.5;
+  background: #fffdf8;
+}
+
+h1,
+h2 {
+  color: #3f2f25;
+  line-height: 1.2;
+}
+
+h1 {
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #d7c2a3;
+}
+
+h2 {
+  margin-top: 36px;
+  margin-bottom: 16px;
+}
+
+p {
+  margin: 10px 0;
+}
+
+a {
+  color: #8a3b12;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+form {
+  margin: 18px 0 28px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #e4d6bf;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(70, 50, 35, 0.08);
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+input,
+select,
+button {
+  font: inherit;
+}
+
+input,
+select {
+  width: 100%;
+  max-width: 320px;
+  padding: 10px 12px;
+  border: 1px solid #cdb89a;
+  border-radius: 10px;
+  background: #fffdfa;
+  color: #2f241d;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #d99058;
+  border-color: #d99058;
+}
+
+button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #8a3b12;
+  color: #fffaf3;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  background: #6f2f0e;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0 36px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(70, 50, 35, 0.08);
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 12px 14px;
+  border: 1px solid #eadfce;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f1e2cc;
+  color: #4b3628;
+}
+
+tr:nth-child(even) td {
+  background: #fffaf2;
+}
+
+hr {
+  border: 0;
+  border-top: 2px solid #e5d5bb;
+  margin: 32px 0;
+}
+
+@media (max-width: 720px) {
+  body {
+    padding: 24px 14px 40px;
+  }
+
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 18px;
+    border: 1px solid #eadfce;
+    background: #fff;
+  }
+
+  td {
+    border: 0;
+    border-bottom: 1px solid #f0e7da;
+  }
+
+  td:last-child {
+    border-bottom: 0;
+  }
+
+  input,
+  select {
+    max-width: 100%;
+  }
+}
