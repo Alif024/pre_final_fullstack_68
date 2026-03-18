@@ -1,3 +1,4 @@
+// ============ [INITIALIZATION] ============
 require('dotenv').config();
 const express = require('express');
 const Sequelize = require('sequelize');
@@ -91,11 +92,89 @@ const Enrollments = sequelize.define('enrollments', {
 sequelize.sync();
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Please use the /students, /subjects or /enrollments endpoint to manage data');
+});
+// =========== [END INITIALIZATION] ============
+
+// =========== [API ROUTES] ===========
+
+  // Get all students
+app.get('/students',async (req, res) => {
+  try {
+    const students = await Students.findAll();
+    if (students.length > 0) {
+      res.json(students);
+    } else {
+      res.status(404).json({ error: 'No students found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch students' });
+  }
 });
 
+  // Get one student
+app.get('/students/:id', async (req, res) => {
+  try {
+    const student = await Students.findByPk(req.params.id);
+    if (student) {
+      res.json(student);
+    } else {
+      res.status(404).json({ error: 'Student not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch student' });
+  }
+});
 
+  // Create a new student
+app.post('/students', async (req, res) => {
+  try {
+    const { student_code, full_name, major } = req.body;
+    const student = await Students.create({ student_code, full_name, major });
+    res.status(201).json(student);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create student' });
+  }
+});
 
+  // Update a student
+app.put('/students/:id', async (req, res) => {
+  try {
+    const { student_code, full_name, major } = req.body;
+    const student = await Students.findByPk(req.params.id);
+    if (student) {
+      student.student_code = student_code || student.student_code;
+      student.full_name = full_name || student.full_name;
+      student.major = major || student.major;
+      await student.save();
+      res.json(student);
+    } else {
+      res.status(404).json({ error: 'Student not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update student' });
+  }
+});
+
+  // Delete a student
+app.delete('/students/:id', async (req, res) => {
+  try {
+    const student = await Students.findByPk(req.params.id);
+    if (student) {
+      await student.destroy();
+      res.json({ message: 'Student deleted' });
+    } else {
+      res.status(404).json({ error: 'Student not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete student' });
+  }
+});
+
+// =========== [END API ROUTES] ===========
+
+// =========== [START SERVER] ===========
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
 });
+// =========== [END SERVER] ===========
