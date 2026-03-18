@@ -249,6 +249,64 @@ app.post("/enrollments/:id/delete", async (req, res) => {
   }
 });
 
+app.get("/reports", async (req, res) => {
+  try {
+    const [studentsResponse, subjectsResponse, enrollmentsResponse] =
+      await Promise.all([
+        axios.get(`${BACKEND_URL}/students`),
+        axios.get(`${BACKEND_URL}/subjects`),
+        axios.get(`${BACKEND_URL}/enrollments`),
+      ]);
+
+    const students = studentsResponse.data;
+    const subjects = subjectsResponse.data;
+    const enrollments = enrollmentsResponse.data;
+    const passingGrades = ["A", "B+", "B", "C+", "C", "D+", "D"];
+
+    const report = subjects.map((subject) => {
+      const subjectEnrollments = enrollments.filter(
+        (enrollment) => enrollment.subject_id === subject.id,
+      );
+
+      const reportStudents = subjectEnrollments.map((enrollment) => {
+        const student = students.find(
+          (studentItem) => studentItem.id === enrollment.student_id,
+        );
+
+        return {
+          studentCode: student ? student.student_code : "-",
+          studentName: student ? student.full_name : "-",
+          semester: enrollment.semester,
+          grade: enrollment.grade || "-",
+        };
+      });
+
+      return {
+        subjectCode: subject.subject_code,
+        title: subject.subject_name,
+        credits: subject.credits,
+        enrollmentCount: subjectEnrollments.length,
+        passedCount: subjectEnrollments.filter((enrollment) =>
+          passingGrades.includes(enrollment.grade),
+        ).length,
+        failedCount: subjectEnrollments.filter(
+          (enrollment) => enrollment.grade === "F",
+        ).length,
+        students: reportStudents,
+      };
+    });
+
+    res.render("reports", { report });
+  } catch (error) {
+    console.error("Error fetching reports:", error.message);
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error fetching reports'); window.history.back();</script>",
+      );
+  }
+});
+
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
 });

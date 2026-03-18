@@ -6,6 +6,42 @@
   <title>Reports</title>
 </head>
 <body>
-  
+  <h1>Enrollment Summary by Subject</h1>
+  <p><a href="/">Back to Home</a></p>
+
+  <% report.forEach((item) => { %>
+    <hr>
+    <h2><%= item.subjectCode %> - <%= item.title %></h2>
+    <p>Credits: <%= item.credits %></p>
+    <p>Total: <%= item.enrollmentCount %></p>
+    <p>Pass: <%= item.passedCount %></p>
+    <p>Fail: <%= item.failedCount %></p>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Student Code</th>
+          <th>Student Name</th>
+          <th>Semester</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (item.students.length === 0) { %>
+          <tr>
+            <td colspan="4">No enrollments yet</td>
+          </tr>
+        <% } %>
+        <% item.students.forEach((student) => { %>
+          <tr>
+            <td><%= student.studentCode %></td>
+            <td><%= student.studentName %></td>
+            <td><%= student.semester %></td>
+            <td><%= student.grade %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% }) %>
 </body>
 </html>
