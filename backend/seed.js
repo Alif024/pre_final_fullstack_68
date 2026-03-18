@@ -11,6 +11,7 @@ app.use(express.json());
 const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "./backend/database/data.sqlite",
+  logging: false,
 });
 
 const Students = sequelize.define("students", {
