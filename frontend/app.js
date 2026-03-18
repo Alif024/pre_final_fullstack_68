@@ -167,7 +167,11 @@ app.post("/enrollments", async (req, res) => {
     res.redirect("/enrollments");
   } catch (error) {
     console.error("Error creating enrollment:", error.message);
-    res.status(500).send("Error creating enrollment");
+    res
+      .status(500)
+      .send(
+        "<script>alert('Error creating enrollment'); window.history.back();</script>",
+      );
   }
 });
 
