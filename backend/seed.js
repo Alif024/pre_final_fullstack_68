@@ -57,41 +57,52 @@ const Subjects = sequelize.define("subjects", {
   },
 });
 
-const Enrollments = sequelize.define("enrollments", {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false,
-  },
-  student_id: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    references: {
-      model: Students,
-      key: "id",
+const Enrollments = sequelize.define(
+  "enrollments",
+  {
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    student_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: Students,
+        key: "id",
+      },
+    },
+    subject_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: Subjects,
+        key: "id",
+      },
+    },
+    semester: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    grade: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      validate: {
+        isIn: [["A", "B+", "B", "C+", "C", "D+", "D", "F", null]],
+      },
     },
   },
-  subject_id: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    references: {
-      model: Subjects,
-      key: "id",
-    },
+  {
+    indexes: [
+      {
+        unique: true,
+        fields: ["student_id", "subject_id"],
+      },
+    ],
   },
-  semester: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  grade: {
-    type: Sequelize.STRING,
-    allowNull: true,
-    validate: {
-      isIn: [["A", "B+", "B", "C+", "C", "D+", "D", "F", null]],
-    },
-  },
-});
+);
 
 sequelize.sync();
 
